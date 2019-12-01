@@ -10,7 +10,6 @@ const normalizePort = port => parseInt(port, 10);
 const PORT = normalizePort(process.env.PORT || 3001);
 
 const app = express();
-const URL = `https://api.imgflip.com/get_memes`;
 
 app.disable("x-powered-by");
 app.use(cors());
@@ -32,6 +31,7 @@ if (process.env.NODE_ENV === "production") {
 }
 
 app.get("/api", (req, res) => {
+  const URL = `https://api.imgflip.com/get_memes`;
   fetch(URL)
     .then(function(response) {
       return response.json();
