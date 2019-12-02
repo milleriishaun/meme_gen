@@ -11,24 +11,12 @@ const PORT = normalizePort(process.env.PORT || 3001);
 
 const app = express();
 
-app.disable("x-powered-by");
 app.use(cors());
 app.use(compression());
+app.disable("x-powered-by");
 app.use(morgan("common"));
 
 console.log(`working...`);
-
-// Node/Express we'd like it to serve static assets in production
-if (process.env.NODE_ENV === "production") {
-  app.use(express.static(path.join(__dirname, "client/build")));
-
-  // Handle React routing, return all requests to React app
-  app.get("*", (req, res) => {
-    // Send any other requests to the index.html page
-    console.log(`hit Herokuproxy(${PORT}) or express proxy(port3001)`);
-    res.sendFile(path.join(__dirname + "/client/build/index.html"));
-  });
-}
 
 app.get("/api", (req, res) => {
   const URL = `https://api.imgflip.com/get_memes`;
@@ -44,6 +32,18 @@ app.get("/api", (req, res) => {
       console.log("error catch block response fetch: ", e);
     });
 });
+
+// Node/Express we'd like it to serve static assets in production
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static(path.join(__dirname, "client/build")));
+
+  // Handle React routing, return all requests to React app
+  app.get("*", (req, res) => {
+    // Send any other requests to the index.html page
+    console.log(`hit Herokuproxy(${PORT}) or express proxy(port3001)`);
+    res.sendFile(path.join(__dirname + "/client/build/index.html"));
+  });
+}
 
 app.listen(PORT, err => {
   if (err) throw err;
