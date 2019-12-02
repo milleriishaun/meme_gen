@@ -27,6 +27,7 @@
     "eject": "react-scripts eject",
     "lint": "eslint ."
   },
-  "author": "",
-  "license": "ISC"
+  "author": "milleriishaun",
+  "license": "ISC",
+  "homepage": "https://meme-g.herokuapp.com/"
 }
