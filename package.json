@@ -15,11 +15,12 @@
     "react-dom": "^16.8.6",
     "react-scripts": "3.0.1"
   },
-  "proxy": "http://localhost:3001/",
   "scripts": {
-    "start": "concurrently \"npm run server\" \"npm run client\"",
+    "start": "node server.js",
     "server": "node server.js",
     "client": "node start-client.js",
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "predeploytest": "NODE_ENV=production node server.js",
     "heroku-postbuild": "cd client && npm install && npm install --only=dev --no-shrinkwrap && npm run build",
     "build": "react-scripts build",
     "test": "react-scripts test",
