@@ -1,5 +1,3 @@
-Meme-Generator
-
 # ![cats] Meme-Generator
 
 ###### _...:shipit::rocket:_
